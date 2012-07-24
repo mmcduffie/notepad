@@ -1,15 +1,21 @@
 module Notepad
   
+  # Global Constants
   VERSION = '0.0.0'
+  DB_PATH = "#{File.expand_path(File.dirname(__FILE__))}/db/notepad.db"
   
-  #For some reason, normal require/autoload doesn't work on my windows box.
-  CURRENT_DIR = File.expand_path(File.dirname(__FILE__))
-  require "#{CURRENT_DIR}/notepad/main_window.rb"
-  require "#{CURRENT_DIR}/notepad/note.rb"
+  # Requires
+  require 'sqlite3'
+  require_relative 'notepad/main_window.rb'
+  require_relative 'notepad/note.rb'
+  
+  # Main Code
 
-  #autoload :MainWindow, 'notepad/main_window.rb'
+  note = Notepad::Note.new
+  note.note = "foo"
+  note.save
 
-  Gtk.init
-  main_window = Notepad::MainWindow.new
-  Gtk.main
+  #Gtk.init
+  #main_window = Notepad::MainWindow.new
+  #Gtk.main
 end
