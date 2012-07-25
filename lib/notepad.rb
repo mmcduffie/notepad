@@ -19,10 +19,10 @@ module Notepad
   #notes = Notepad::Notes.new
   #puts notes.find(67).inspect
 
-  notes = Notepad::Notes.new
-  puts notes.show_all.inspect
+  #notes = Notepad::Notes.new
+  #puts notes.show_all.inspect
 
-  #Gtk.init
-  #main_window = Notepad::MainWindow.new
-  #Gtk.main
+  Gtk.init
+  main_window = Notepad::MainWindow.new
+  Gtk.main
 end

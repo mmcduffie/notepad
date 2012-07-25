@@ -55,10 +55,41 @@ module Notepad
 
         mb.append filem
 
-        vbox = Gtk::VBox.new false, 2
-        vbox.pack_start mb, false, false, 0
+        #Note table
 
-        add vbox
+        table_vbox = Gtk::VBox.new false, 5
+        table_hbox = Gtk::HBox.new false, 5
+
+        treestore = Gtk::TreeStore.new(String, Integer)
+
+        parent = treestore.append(nil)
+        parent[0] = "A note is a very long string of text."
+        parent[1] = 1962
+        parent = treestore.append(nil)
+        parent[0] = "Notes can be really long and may screw up the formatting of these columns."
+        parent[1] = 1962
+
+        view = Gtk::TreeView.new(treestore)
+        view.selection.mode = Gtk::SELECTION_SINGLE
+        renderer = Gtk::CellRendererText.new
+        col = Gtk::TreeViewColumn.new("Note", renderer, :text => 0)
+        view.append_column(col)
+        renderer = Gtk::CellRendererText.new
+        col = Gtk::TreeViewColumn.new("Time", renderer)
+        view.append_column(col)
+        col.set_cell_data_func(renderer) do |col, renderer, model, iter|
+          renderer.text = Time.at(iter[1]).to_s
+        end
+        table_vbox.pack_start view, false, false, 10
+        table_hbox.pack_start table_vbox, false, false, 7
+
+        #Main vbox
+
+        parent_vbox = Gtk::VBox.new false, 2
+        parent_vbox.pack_start mb, false, false, 0
+        parent_vbox.pack_start table_hbox, false, false, 0
+
+        add parent_vbox
     end
   end
 end
