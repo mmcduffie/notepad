@@ -3,7 +3,7 @@ module Notepad
     def initialize
         super
     
-        set_title "Image menu"
+        set_title "Notepad"
         signal_connect "destroy" do 
             Gtk.main_quit 
         end

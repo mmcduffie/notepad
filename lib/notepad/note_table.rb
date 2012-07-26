@@ -5,12 +5,13 @@ module Notepad
       table_vbox = Gtk::VBox.new false, 5
       treestore = Gtk::TreeStore.new(String, Integer)
 
-      parent = treestore.append(nil)
-      parent[0] = "A note is a very long string of text."
-      parent[1] = 1962
-      parent = treestore.append(nil)
-      parent[0] = "Notes can be really long and may screw up the formatting of these columns."
-      parent[1] = 1962
+      notes = Notepad::Notes.new.show_all
+
+      notes.each do |note|
+        parent = treestore.append(nil)
+        parent[0] = note.note
+        parent[1] = note.date
+      end
 
       view = Gtk::TreeView.new(treestore)
       view.selection.mode = Gtk::SELECTION_SINGLE
