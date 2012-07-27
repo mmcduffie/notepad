@@ -9,6 +9,7 @@ module Notepad
   require 'gtk2'
   require_relative 'notepad/main_window.rb'
   require_relative 'notepad/note_table.rb'
+  require_relative 'notepad/note_form.rb'
   require_relative 'notepad/menu_bar.rb'
   require_relative 'notepad/note.rb'
   require_relative 'notepad/notes.rb'

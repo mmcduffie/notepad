@@ -17,14 +17,19 @@ module Notepad
     end
     
     def init_ui
+        notebook = Gtk::Notebook.new
 
         note_table = Notepad::NoteTable.new
+        note_form = Notepad::NoteForm.new
 
         menu_bar = Notepad::MenuBar.new self
 
+        notebook.append_page note_table, Gtk::Label.new("Notes")
+        notebook.append_page note_form, Gtk::Label.new("Edit Note")
+
         parent_vbox = Gtk::VBox.new false, 2
         parent_vbox.pack_start menu_bar, false, false, 0
-        parent_vbox.pack_start note_table, false, false, 0
+        parent_vbox.pack_start notebook, false, false, 0
 
         add parent_vbox
     end

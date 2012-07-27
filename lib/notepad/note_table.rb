@@ -18,10 +18,10 @@ module Notepad
       renderer = Gtk::CellRendererText.new
       renderer.width = 400
       renderer.ellipsize = Pango::ELLIPSIZE_END
-      col = Gtk::TreeViewColumn.new("Note", renderer, :text => 0)
+      col = Gtk::TreeViewColumn.new(" Note", renderer, :text => 0)
       view.append_column(col)
       renderer = Gtk::CellRendererText.new
-      col = Gtk::TreeViewColumn.new("Time", renderer)
+      col = Gtk::TreeViewColumn.new(" Time", renderer)
       view.append_column(col)
       col.set_cell_data_func(renderer) do |col, renderer, model, iter|
         time = Time.at(iter[1])
