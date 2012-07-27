@@ -17,13 +17,10 @@ module Notepad
     end
     
     def init_ui
-        
-        agr = Gtk::AccelGroup.new
-        add_accel_group agr
- 
-        menu_bar = Notepad::MenuBar.new agr
 
         note_table = Notepad::NoteTable.new
+
+        menu_bar = Notepad::MenuBar.new self
 
         parent_vbox = Gtk::VBox.new false, 2
         parent_vbox.pack_start menu_bar, false, false, 0
