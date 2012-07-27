@@ -16,13 +16,16 @@ module Notepad
       view = Gtk::TreeView.new(treestore)
       view.selection.mode = Gtk::SELECTION_SINGLE
       renderer = Gtk::CellRendererText.new
+      renderer.width = 400
+      renderer.ellipsize = Pango::ELLIPSIZE_END
       col = Gtk::TreeViewColumn.new("Note", renderer, :text => 0)
       view.append_column(col)
       renderer = Gtk::CellRendererText.new
       col = Gtk::TreeViewColumn.new("Time", renderer)
       view.append_column(col)
       col.set_cell_data_func(renderer) do |col, renderer, model, iter|
-        renderer.text = Time.at(iter[1]).to_s
+        time = Time.at(iter[1])
+        renderer.text = time.strftime("%m/%d/%Y %I:%M%p")
       end
       table_vbox.pack_start view, false, false, 10
 

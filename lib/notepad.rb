@@ -16,8 +16,8 @@ module Notepad
   # Main Code
 
   #note = Notepad::Note.new
-  #note.note = "foo"
-  #puts note.save.inspect
+  #note.note = "This is a really long note because I am crazy"
+  #note.save
   
   #notes = Notepad::Notes.new
   #puts notes.find(67).inspect
