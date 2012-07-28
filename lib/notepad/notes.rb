@@ -32,9 +32,9 @@ module Notepad
         db.close if db
       end
       output = Notepad::Note.new
-      output.id = result[0]
-      output.note = result[1]
-      output.date = result[2]
+      output.id = result[0][0]
+      output.note = result[0][1]
+      output.date = result[0][2]
       if output.id
         return output
       else

@@ -2,6 +2,7 @@ module Notepad
   class NoteForm < Gtk::HBox
     def initialize
       super()
+
       table_vbox = Gtk::VBox.new false, 5
      
       textview = Gtk::TextView.new
@@ -17,7 +18,13 @@ module Notepad
       textview.right_margin = 8
       textview.set_width_request(518)
       textview.set_height_request(162)
-      textview.buffer.text = "This is some text!\nChange me!\nPlease!"
+
+      signal_connect("expose_event") do |w,e|
+        if Notepad.selected_row
+          note = Notepad.notes.find(Notepad.selected_row).note
+          textview.buffer.text = note
+        end
+      end
 
       scrolled_win = Gtk::ScrolledWindow.new
       scrolled_win.border_width = 5
