@@ -1,11 +1,11 @@
 module Notepad
   class NoteTable < Gtk::HBox
-    def initialize
+    def initialize(window)
       super()
       table_vbox = Gtk::VBox.new false, 5
       treestore = Gtk::TreeStore.new(Integer, String, Integer)
 
-      notes = Notepad.notes.show_all
+      notes = window.notes.show_all
 
       notes.each do |note|
         parent = treestore.append(nil)
@@ -19,7 +19,7 @@ module Notepad
       view.signal_connect("cursor-changed") do |w,e| 
         selection = w.selection
         if iter = selection.selected
-          Notepad.selected_row = iter[0]
+          window.selected_row = iter[0]
         end
       end
 

@@ -1,5 +1,7 @@
 module Notepad
   class MainWindow < Gtk::Window
+    attr_accessor :notes
+    attr_accessor :selected_row
     def initialize
         super
     
@@ -8,6 +10,8 @@ module Notepad
             Gtk.main_quit 
         end
         
+        @notes = Notepad::Notes.new
+
         init_ui
 
         set_default_size 250, 200
@@ -17,12 +21,11 @@ module Notepad
     end
     
     def init_ui
-        notebook = Gtk::Notebook.new
-
-        note_table = Notepad::NoteTable.new
-        note_form = Notepad::NoteForm.new
-
-        menu_bar = Notepad::MenuBar.new self
+        notebook   = Gtk::Notebook.new
+        
+        note_table = Notepad::NoteTable.new self
+        note_form  = Notepad::NoteForm.new  self
+        menu_bar   = Notepad::MenuBar.new   self
 
         notebook.append_page note_table, Gtk::Label.new("Notes")
         notebook.append_page note_form, Gtk::Label.new("Edit Note")

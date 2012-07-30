@@ -16,18 +16,18 @@ module Notepad
   
   # Main Code
 
-  @selected_row = nil
-  def self.selected_row
-    @selected_row
-  end
-  def self.selected_row=(id)
-    @selected_row = id
-  end
+  #@selected_row = nil
+  #def self.selected_row
+  #  @selected_row
+  #end
+  #def self.selected_row=(id)
+  #  @selected_row = id
+  #end
 
-  @notes = Notepad::Notes.new
-  def self.notes
-    @notes
-  end
+  #@notes = Notepad::Notes.new
+  #def self.notes
+  #  @notes
+  #end
 
   Gtk.init
   main_window = Notepad::MainWindow.new

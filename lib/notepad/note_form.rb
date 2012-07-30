@@ -1,10 +1,12 @@
 module Notepad
   class NoteForm < Gtk::HBox
-    def initialize
+    def initialize(window)
       super()
 
       table_vbox = Gtk::VBox.new false, 5
      
+      save_button = Gtk::Button.new("Save")
+
       textview = Gtk::TextView.new
       font = Pango::FontDescription.new("Monospace Bold 10")
       textview.modify_font(font)
@@ -20,8 +22,8 @@ module Notepad
       textview.set_height_request(162)
 
       signal_connect("expose_event") do |w,e|
-        if Notepad.selected_row
-          note = Notepad.notes.find(Notepad.selected_row).note
+        if window.selected_row
+          note = window.notes.find(window.selected_row).note
           textview.buffer.text = note
         end
       end
@@ -32,6 +34,7 @@ module Notepad
       scrolled_win.add(textview)
 
       table_vbox.pack_start scrolled_win, false, false, 10
+      table_vbox.add save_button
 
       pack_start table_vbox, false, false, 7
     end
