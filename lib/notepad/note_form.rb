@@ -21,17 +21,17 @@ module Notepad
       textview.set_width_request(518)
       textview.set_height_request(162)
 
-      signal_connect("expose_event") do |w,e|
-        if window.selected_row
-          note = window.notes.find(window.selected_row).note
-          textview.buffer.text = note
-        end
-      end
-
       scrolled_win = Gtk::ScrolledWindow.new
       scrolled_win.border_width = 5
       scrolled_win.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
       scrolled_win.add(textview)
+
+      scrolled_win.signal_connect("expose_event") do |w,e|
+        if window.selected_row != nil
+          note = window.notes.find(window.selected_row).note
+          textview.buffer.text = note
+        end
+      end
 
       table_vbox.pack_start scrolled_win, false, false, 10
       table_vbox.add save_button
